@@ -2,8 +2,11 @@ package myfirstwebsite.board.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,9 +14,15 @@ import lombok.Setter;
 @Getter @Setter
 public class Member {
 
-  @Id @GeneratedValue
+  @Id
+  @GeneratedValue
   @Column(name = "member_id")
   private Long id;
 
-  private String name;
+  private String userId;
+  private String password;
+  private String userName;
+
+  @Enumerated(EnumType.STRING)
+  private Role role;
 }
