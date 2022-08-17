@@ -1,5 +1,6 @@
 package myfirstwebsite.board.repository;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import myfirstwebsite.board.domain.Member;
@@ -17,5 +18,9 @@ public class MemberRepository {
 
   public Member findMember(Long id) {
     return em.find(Member.class, id);
+  }
+
+  public List<Member> findAll() {         //Member entity 전체를 리스트로 반환
+    return em.createQuery("select m from Member m", Member.class).getResultList();
   }
 }

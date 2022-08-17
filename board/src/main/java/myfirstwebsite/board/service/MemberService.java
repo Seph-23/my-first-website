@@ -1,5 +1,6 @@
 package myfirstwebsite.board.service;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import myfirstwebsite.board.domain.Member;
 import myfirstwebsite.board.repository.MemberRepository;
@@ -21,4 +22,12 @@ public class MemberService {
     memberRepository.save(member);
     return member.getId();
   }
+
+  /**
+   * 회원 전체 조회!
+   */
+  public List<Member> findAllMembers(){
+    return memberRepository.findAll();
+  }
+
 }

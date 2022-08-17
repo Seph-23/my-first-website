@@ -1,5 +1,6 @@
 package myfirstwebsite.board.controller;
 
+import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import myfirstwebsite.board.domain.Member;
@@ -34,4 +35,12 @@ public class MemberController {
 
     return "redirect:/";
   }
+
+  @GetMapping("/members/list")
+  public String showMembers(Model model){
+    List<Member> members = memberService.findAllMembers();
+    model.addAttribute("members", members);
+    return "members/membersList";
+  }
+
 }

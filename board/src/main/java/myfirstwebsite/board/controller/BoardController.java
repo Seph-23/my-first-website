@@ -15,7 +15,6 @@ public class BoardController {
 
   private final BoardService boardService;
 
-  //URL Mapping
   @GetMapping("/boards/new")
   public String boardForm(Model model) {
     model.addAttribute("boardForm", new BoardForm());
