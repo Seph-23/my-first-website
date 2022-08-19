@@ -1,5 +1,6 @@
 package myfirstwebsite.board.service;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import myfirstwebsite.board.domain.Board;
 import myfirstwebsite.board.repository.BoardRepository;
@@ -20,5 +21,13 @@ public class BoardService {
   public Long postBoard(Board board) {
     boardRepository.save(board);
     return board.getId();
+  }
+
+  public List<Board> findBoards() {
+    return boardRepository.findAll();
+  }
+
+  public Board findOne(Long boardId) {
+    return boardRepository.findOne(boardId);
   }
 }

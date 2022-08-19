@@ -1,5 +1,6 @@
 package myfirstwebsite.board.repository;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import myfirstwebsite.board.domain.Board;
@@ -16,6 +17,15 @@ public class BoardRepository {
   }
 
   public Board findBoard(Long id) {
+    return em.find(Board.class, id);
+  }
+
+  public List<Board> findAll() {
+    return em.createQuery("select b from Board b", Board.class)
+      .getResultList();
+  }
+
+  public Board findOne(Long id) {
     return em.find(Board.class, id);
   }
 }

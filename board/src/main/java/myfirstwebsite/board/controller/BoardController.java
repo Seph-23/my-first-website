@@ -1,5 +1,6 @@
 package myfirstwebsite.board.controller;
 
+import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import myfirstwebsite.board.domain.Board;
@@ -7,6 +8,7 @@ import myfirstwebsite.board.service.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -27,10 +29,23 @@ public class BoardController {
     board.setTitle(form.getTitle());
     board.setAuthor(form.getAuthor());
     board.setContent(form.getContent());
-    board.setViews(0);
 
     boardService.postBoard(board);
 
     return "redirect:/";
+  }
+
+  @GetMapping("/boards")
+  public String boardList(Model model) {
+    List<Board> boards = boardService.findBoards();
+    model.addAttribute("boards", boards);
+    return "boards/listBoard";
+  }
+
+  @GetMapping("/boards/{boardId}")
+  public String boardDetail(@PathVariable("boardId") Long boardId, Model model) {
+    Board board = boardService.findOne(boardId);
+    model.addAttribute("board", board);
+    return "boards/boardDetail";
   }
 }

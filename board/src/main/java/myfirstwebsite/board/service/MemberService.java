@@ -1,6 +1,7 @@
 package myfirstwebsite.board.service;
 
 import java.util.List;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import myfirstwebsite.board.domain.Member;
 import myfirstwebsite.board.repository.MemberRepository;
