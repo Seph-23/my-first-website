@@ -17,10 +17,10 @@
 </head>
 <body>
 <div class="container">
-  <h1>아래 정보를 입력해주세요</h1>
+  <h1>회원 가입</h1>
   <form role="form" action="/members/new" th:object="${memberForm}" method="post">
     <div class="form-group">
-      <label th:for="userId" th:text="${memberForm.userId}">아이디: </label>
+      <label th:for="userId">아이디: </label>
       <input type="text" id="userId" th:field="*{userId}"
              th:errorclass="field-error"
              class="form-control" placeholder="아이디를 입력하세요">
@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label th:for="password" th:text="${memberForm.password}">패스워드: </label>
+      <label th:for="password">패스워드: </label>
       <input type="password" id="password" th:field="*{password}"
              th:errorclass="field-error"
              class="form-control" placeholder="비밀번호를 입력하세요">
@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label th:for="userName" th:text="${memberForm.userName}">닉네임: </label>
+      <label th:for="userName">닉네임: </label>
       <input type="text" id="userName" th:field="*{userName}"
              th:errorclass="field-error"
              class="form-control" placeholder="닉네임을 입력하세요">
@@ -46,6 +46,7 @@
         닉네임 오류
       </div>
     </div>
+    
     <button type="submit" class="btn btn-primary">Submit</button>
 
   </form>
