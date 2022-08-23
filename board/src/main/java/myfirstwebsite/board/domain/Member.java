@@ -20,8 +20,13 @@ public class Member {
   @Column(name = "member_id")
   private Long id;
 
+  @Column(nullable = false, length=30, unique = true)
   private String userId;
+
+  @Column(nullable = false, length=100)
   private String password;
+
+  @Column(nullable = false)
   private String userName;
 
   @Enumerated(EnumType.STRING)
