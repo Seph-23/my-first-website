@@ -31,29 +31,23 @@ public class BoardController {
   }
 
   @PostMapping("/boards/new")
-  public String writeBoard(@ModelAttribute BoardForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+  public String writeBoard(@ModelAttribute BoardForm boardForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
     //Validation Logic
     //제목, 저자, 내용 공백 미허용
-    if (!StringUtils.hasText(form.getTitle())) {
-      bindingResult.addError(new FieldError("form", "title", form.getTitle(),
-                false, null, null, "제목을 입력해주세요."));
-    } else if (form.getTitle().length() < 1 || form.getTitle().length() > 30) {   //제목 길이 1~30
-      bindingResult.addError(new FieldError("form", "title", form.getTitle(),
-                            false, null, null, "제목 길이는 1 ~ 30 자 이내여야 합니다."));
+    if (!StringUtils.hasText(boardForm.getTitle())) {
+      bindingResult.rejectValue("title", "required");
+    } else if (boardForm.getTitle().length() < 1 || boardForm.getTitle().length() > 30) {   //제목 길이 1~30
+      bindingResult.rejectValue("title", "range");
     }
-    if (!StringUtils.hasText(form.getAuthor())) {
-      bindingResult.addError(new FieldError("form", "author", form.getAuthor(),
-                            false, null, null, "저자를 입력해주세요."));
-    } else if (form.getAuthor().length() < 2 || form.getAuthor().length() > 10) {   //저자 길이 2~10
-      bindingResult.addError(new FieldError("form", "author", form.getAuthor(),
-                            false, null, null, "저자 길이는 2 ~ 10 자 이내여야 합니다."));
+    if (!StringUtils.hasText(boardForm.getAuthor())) {
+      bindingResult.rejectValue("author", "required");
+    } else if (boardForm.getAuthor().length() < 2 || boardForm.getAuthor().length() > 10) {   //저자 길이 2~10
+      bindingResult.rejectValue("author", "range");
     }
-    if (!StringUtils.hasText(form.getContent())) {
-      bindingResult.addError(new FieldError("form", "content", form.getContent(),
-                            false, null, null, "내용을 입력해주세요."));
-    } else if (form.getContent().length() < 1 || form.getContent().length() > 230) {
-      bindingResult.addError(new FieldError("form", "content", form.getContent(),
-                            false, null, null, "내용 길이는 1 ~ 230 자 이내여야 합니다."));
+    if (!StringUtils.hasText(boardForm.getContent())) {
+      bindingResult.rejectValue("content", "required");
+    } else if (boardForm.getContent().length() < 1 || boardForm.getContent().length() > 230) {
+      bindingResult.rejectValue("content", "range");
     }
 
     if (bindingResult.hasErrors()) {
@@ -63,9 +57,9 @@ public class BoardController {
 
     //Board Added Success Logic
     Board board = new Board();
-    board.setTitle(form.getTitle());
-    board.setAuthor(form.getAuthor());
-    board.setContent(form.getContent());
+    board.setTitle(boardForm.getTitle());
+    board.setAuthor(boardForm.getAuthor());
+    board.setContent(boardForm.getContent());
 
     boardService.postBoard(board);
 

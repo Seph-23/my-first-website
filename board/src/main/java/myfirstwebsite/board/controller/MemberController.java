@@ -31,29 +31,23 @@ public class MemberController {
   }
 
   @PostMapping("/members/new")
-  public String signUp(@ModelAttribute MemberForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+  public String signUp(@ModelAttribute MemberForm memberForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
     //Validation Logic
     //아이디, 패스워드, 닉네임 공백 미허용
-    if (!StringUtils.hasText(form.getUserId())) {
-      bindingResult.addError(new FieldError("form", "userId", form.getUserId(),
-        false, null, null,"아이디를 입력해주세요."));
-    } else if (form.getUserId().length() < 8 || form.getUserId().length() > 15) { //아이디 길이는 8 ~ 15 자.
-      bindingResult.addError(new FieldError("form", "userId", form.getUserId(),
-        false, null, null, "아이디는 8 ~ 15 자 이내여야 합니다."));
+    if (!StringUtils.hasText(memberForm.getUserId())) {
+      bindingResult.rejectValue("userId", "required");
+    } else if (memberForm.getUserId().length() < 8 || memberForm.getUserId().length() > 15) { //아이디 길이는 8 ~ 15 자.
+      bindingResult.rejectValue("userId", "range");
     }
-    if (!StringUtils.hasText(form.getPassword())) {
-      bindingResult.addError(new FieldError("form", "password", form.getPassword(),
-        false, null, null, "패스워드를 입력해주세요."));
-    } else if (form.getPassword().length() < 8 || form.getPassword().length() > 20) { //패스워드 길이는 8 ~ 20 자.
-      bindingResult.addError(new FieldError("form", "password", form.getPassword(),
-        false, null, null, "패스워드는 8 ~ 20 자 이내여야 합니다."));
+    if (!StringUtils.hasText(memberForm.getPassword())) {
+      bindingResult.rejectValue("password", "required");
+    } else if (memberForm.getPassword().length() < 8 || memberForm.getPassword().length() > 20) { //패스워드 길이는 8 ~ 20 자.
+      bindingResult.rejectValue("password", "range");
     }
-    if (!StringUtils.hasText(form.getUserName())) {
-      bindingResult.addError(new FieldError("form", "userName", form.getUserName(),
-        false, null, null, "닉네임을 입력해주세요."));
-    } else if (form.getUserName().length() < 2 || form.getUserName().length() > 10) {
-      bindingResult.addError(new FieldError("form", "userName", form.getUserName(),
-        false, null, null, "닉네임은 2 ~ 10 자 이내여야 합니다."));
+    if (!StringUtils.hasText(memberForm.getUserName())) {
+      bindingResult.rejectValue("userName", "required");
+    } else if (memberForm.getUserName().length() < 2 || memberForm.getUserName().length() > 10) {
+      bindingResult.rejectValue("userName", "range");
     }
 
     if (bindingResult.hasErrors()) {
@@ -63,9 +57,9 @@ public class MemberController {
 
     //SignUp Success Logic
     Member member = new Member();
-    member.setUserId(form.getUserId());
-    member.setPassword(form.getPassword());
-    member.setUserName(form.getUserName());
+    member.setUserId(memberForm.getUserId());
+    member.setPassword(memberForm.getPassword());
+    member.setUserName(memberForm.getUserName());
     member.setRole(Role.USER);
 
     memberService.signUp(member);
