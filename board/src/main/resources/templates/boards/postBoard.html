@@ -50,7 +50,19 @@
         내용 오류
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">등록</button>
+
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-primary">등록</button>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary" type="button"
+                onclick="location.href='home.html'"
+                th:onclick="|location.href='@{/}'|"
+                th:text="뒤로가기">뒤로가기</button>
+      </div>
+    </div>
+
   </form>
 </div>    <!-- container -->
 </body>
