@@ -1,5 +1,6 @@
 package myfirstwebsite.board.controller;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;

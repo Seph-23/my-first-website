@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type>" content="text/html; charset=UTF-8"/>
   <link th:href="@{/css/bootstrap.min.css}"
         href="../css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -18,7 +18,7 @@
 <body>
 
 <div class="container">
-  <form action="/home" th:action th:object="${memberForm}" method="post">
+  <form action="/members/login" th:action th:object="${memberForm}" method="post">
     <div th:if="${#fields.hasGlobalErrors()}">
       <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
     </div>

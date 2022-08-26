@@ -1,5 +1,6 @@
 package myfirstwebsite.board.interceptor;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -8,8 +9,8 @@ import myfirstwebsite.board.web.SessionConst;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 @Slf4j
-public class LogInCheckInterceptor implements HandlerInterceptor
-{
+public class LogInCheckInterceptor implements HandlerInterceptor {
+
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
     throws Exception {
