@@ -1,5 +1,6 @@
 package myfirstwebsite.board.domain;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,7 +12,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Member {
+public class Member implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

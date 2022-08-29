@@ -1,10 +1,11 @@
 package myfirstwebsite.board.login;
 
+import java.io.Serializable;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
-public class LoginForm {
+public class LoginForm implements Serializable {
 
   @NotEmpty
   private String loginId;

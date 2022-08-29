@@ -16,14 +16,12 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 @RequiredArgsConstructor
 public class HomeController {
 
-  private final MemberRepository memberRepository;
-
-  @RequestMapping("/")
+//  @RequestMapping("/")
   public String home() {
     return "home";
   }
 
-//  @GetMapping("/")
+  @GetMapping("/")
   public String homeLogin(
     @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
     Model model) {
