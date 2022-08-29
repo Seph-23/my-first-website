@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type>" content="text/html; charset=UTF-8"/>
+  <link th:href="@{/css/bootstrap.min.css}"
+        href="../css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .container {
+      max-width: 560px;
+    }
+  </style>
+  <title>게시글 상세보기</title>
+</head>
+<body>
+<div class="container">
+
+  <h1>게시글 상세보기</h1>
+  <h6 th:text="|Author: ${board.author}  Views: ${board.views}
+  Created On: ${board.createdDate}|"></h6>
+  <h3 th:text="|제목: ${board.title}|"></h3>
+  Content:
+  <p  th:text="${board.content}"></p>
+
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary" type="button"
+              onclick="location.href='home.html'"
+              th:onclick="|location.href='@{/}'|"
+              th:text="뒤로가기">뒤로가기</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
