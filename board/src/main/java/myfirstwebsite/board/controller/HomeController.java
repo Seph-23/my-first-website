@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 @RequiredArgsConstructor
 public class HomeController {
 
-//  @RequestMapping("/")
+  //  @RequestMapping("/")
   public String home() {
     return "home";
   }
@@ -31,5 +31,10 @@ public class HomeController {
     }
     model.addAttribute("member", loginMember);
     return "loginHome";
+  }
+
+  @GetMapping("/home")
+  public String homePage() {
+    return "home";
   }
 }
