@@ -1,11 +1,15 @@
 package myfirstwebsite.board.controller;
 
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import myfirstwebsite.board.domain.Board;
+import myfirstwebsite.board.domain.Member;
 import myfirstwebsite.board.service.BoardService;
+import myfirstwebsite.board.service.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -31,7 +35,9 @@ public class BoardController {
   }
 
   @PostMapping("/boards/new")
-  public String writeBoard(@ModelAttribute BoardForm boardForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+  public String writeBoard(@ModelAttribute BoardForm boardForm, BindingResult bindingResult,
+    RedirectAttributes redirectAttributes, Model model) {
+
     //Validation Logic
     //제목, 저자, 내용 공백 미허용
     if (!StringUtils.hasText(boardForm.getTitle())) {
@@ -46,7 +52,7 @@ public class BoardController {
     }
     if (!StringUtils.hasText(boardForm.getContent())) {
       bindingResult.rejectValue("content", "required");
-    } else if (boardForm.getContent().length() < 1 || boardForm.getContent().length() > 230) {
+    } else if (boardForm.getContent().length() < 1 || boardForm.getContent().length() > 230) {    //게시판 내용 길이 1~230
       bindingResult.rejectValue("content", "range");
     }
 
