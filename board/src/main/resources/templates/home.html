@@ -17,17 +17,45 @@
 <div class="container">
 
   <h1>My Website</h1>
-  <p>회원 기능</p>
-  <p>
-    <a href="/members/new">회원 가입</a>
-    <a href="/members/list">회원 목록</a>
-    <a href="/members/login">로그인</a>
-  </p>
-  <p>게시글 기능</p>
-  <p>
-    <a href="/boards/new">게시글 등록</a>
-    <a href="/boards">게시글 목록</a>
-  </p>
+  <h2>회원 기능</h2>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-secondary" type="button"
+              th:onclick="|location.href='@{/members/new}'|">
+        회원가입
+      </button>
+    </div>
+    <div class="col">
+      <button class="btn btn-secondary" type="button"
+              th:onclick="|location.href='@{/members/list}'|">
+        회원 목록
+      </button>
+    </div>
+    <div class="col">
+      <button class="btn btn-secondary" type="button"
+              th:onclick="|location.href='@{/members/login}'|">
+        로그인
+      </button>
+    </div>
+
+  </div>
+
+  <br>
+  <h2>게시글 기능</h2>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-secondary" type="button"
+              th:onclick="|location.href='@{/boards/new}'|">
+        게시글 등록
+      </button>
+    </div>
+    <div class="col">
+      <button class="btn btn-secondary" type="button"
+              th:onclick="|location.href='@{/boards}'|">
+        게시글 목록
+      </button>
+    </div>
+  </div>
 
 </div>  <!-- container -->
 </body>

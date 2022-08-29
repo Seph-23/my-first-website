@@ -25,7 +25,7 @@ public class MemberRepository {
     return em.createQuery("select m from Member m", Member.class).getResultList();
   }
 
-  public Optional<Member> findByLoginId(String loginId) {
-    return findAll().stream().filter(m -> m.getUserId().equals(loginId)).findFirst();
+  public Optional<Member> findByUserId(String userId) {
+    return findAll().stream().filter(m -> m.getUserId().equals(userId)).findFirst();
   }
 }

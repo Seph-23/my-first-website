@@ -11,8 +11,10 @@ public class LoginService {
 
   private final MemberRepository memberRepository;
 
+  //return 이 null일 경우 로그인 실패
   public Member login(String loginId, String password) {
-    return memberRepository.findByLoginId(loginId).filter(m -> m.getPassword().equals(password))
-      .orElse(null);
+    return memberRepository.findByUserId(loginId)
+      .filter(m -> m.getPassword().equals(password)).orElse(null);
   }
+
 }
