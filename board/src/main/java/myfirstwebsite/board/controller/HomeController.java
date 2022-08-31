@@ -1,5 +1,7 @@
 package myfirstwebsite.board.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import myfirstwebsite.board.domain.Member;
@@ -34,7 +36,12 @@ public class HomeController {
   }
 
   @GetMapping("/home")
-  public String homePage() {
+  public String homePage(Model model, HttpServletRequest request) {
+    HttpSession session = request.getSession(false);
+    if (session != null) {  //로그인 안됐을때 문제가 생김..
+      Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+      model.addAttribute("member", member);
+    }
     return "home";
   }
 }

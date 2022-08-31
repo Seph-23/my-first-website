@@ -1,6 +1,8 @@
 package myfirstwebsite.board.controller;
 
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,13 +27,18 @@ public class MemberController {
   private final MemberService memberService;
 
   @GetMapping("/members/new")
-  public String signUpForm(Model model) {
+  public String signUpForm(Model model, HttpServletRequest request) {
+    HttpSession session = request.getSession(false);
+    if (session != null) {    //로그인 되어있으면 다시 홈으로
+      return "home";
+    }
     model.addAttribute("memberForm", new MemberForm());
     return "members/signUp";
   }
 
   @PostMapping("/members/new")
-  public String signUp(@ModelAttribute MemberForm memberForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+  public String signUp(@ModelAttribute MemberForm memberForm, BindingResult bindingResult,
+    RedirectAttributes redirectAttributes, Model model) {
     //Validation Logic
     //아이디, 패스워드, 닉네임 공백 미허용
     if (!StringUtils.hasText(memberForm.getUserId())) {
