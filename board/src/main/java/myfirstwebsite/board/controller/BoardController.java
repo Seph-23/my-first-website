@@ -1,7 +1,6 @@
 package myfirstwebsite.board.controller;
 
 import java.util.List;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,6 @@ import myfirstwebsite.board.domain.Board;
 import myfirstwebsite.board.domain.Member;
 import myfirstwebsite.board.service.BoardService;
 import myfirstwebsite.board.web.SessionConst;
-import org.springframework.session.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
