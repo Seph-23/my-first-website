@@ -1,8 +1,6 @@
 package myfirstwebsite.board.controller;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -46,13 +44,10 @@ public class MemberController {
     } else if (memberForm.getUserId().length() < 8 || memberForm.getUserId().length() > 15) { //아이디 길이는 8 ~ 15 자.
       bindingResult.rejectValue("userId", "range");
     }
-    //비밀번호 정규식 (8~20자, 특문+숫자+영문)
-    Pattern passPattern = Pattern.compile("^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W).{8,20}$");
-    Matcher passMatcher = passPattern.matcher(memberForm.getPassword());
     if (!StringUtils.hasText(memberForm.getPassword())) {
       bindingResult.rejectValue("password", "required");
-    } else if (!passMatcher.find()) { //패스워드 길이는 8 ~ 20 자.
-      bindingResult.rejectValue("password", "check");
+    } else if (memberForm.getPassword().length() < 8 || memberForm.getPassword().length() > 20) { //패스워드 길이는 8 ~ 20 자.
+      bindingResult.rejectValue("password", "range");
     }
     if (!StringUtils.hasText(memberForm.getUserName())) {
       bindingResult.rejectValue("userName", "required");

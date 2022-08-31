@@ -1,0 +1,47 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java'
+}
+
+group = 'my-first-website'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	runtimeOnly 'mysql:mysql-connector-java:8.0.28'
+	// https://mvnrepository.com/artifact/org.springframework.session/spring-session-jdbc
+	implementation 'org.springframework.session:spring-session-jdbc'
+
+//	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-web
+//	implementation 'org.springframework.security:spring-security-web:5.7.3'
+//	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
+//	implementation 'org.springframework.security:spring-security-core:5.7.3'
+//	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-config
+////	implementation 'org.springframework.security:spring-security-config:5.7.3'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

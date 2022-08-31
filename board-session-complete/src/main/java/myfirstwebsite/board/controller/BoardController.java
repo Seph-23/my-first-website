@@ -85,7 +85,6 @@ public class BoardController {
   @GetMapping("/boards/{boardId}")
   public String boardDetail(@PathVariable("boardId") Long boardId, Model model) {
     Board board = boardService.findOne(boardId);
-    board.increaseView();
     model.addAttribute("board", board);
     return "boards/boardDetail";
   }
