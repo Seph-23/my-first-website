@@ -1,6 +1,5 @@
 package myfirstwebsite.board.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -70,7 +69,6 @@ public class BoardController {
     board.setTitle(boardForm.getTitle());
     board.setAuthor(member.getUserName());
     board.setContent(boardForm.getContent());
-    board.setCreatedDate(LocalDateTime.now());
 
     boardService.postBoard(board);
 

@@ -23,10 +23,9 @@ public class Board {
   @Column(columnDefinition = "integer default 0", nullable = false)
   private int views;
 
-  private LocalDateTime createdDate;    //게시글 등록일
+  private LocalDateTime createdDate = LocalDateTime.now();    //게시글 등록일
   private LocalDateTime modifiedDate;      //게시글 수정일
 
-  //조회수 증가
   public void increaseView() {
     views++;
   }
