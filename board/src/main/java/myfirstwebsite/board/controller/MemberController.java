@@ -27,11 +27,7 @@ public class MemberController {
   private final MemberService memberService;
 
   @GetMapping("/members/new")
-  public String signUpForm(Model model, HttpServletRequest request) {
-    HttpSession session = request.getSession(false);
-    if (session != null) {    //로그인 되어있으면 다시 홈으로
-      return "home";
-    }
+  public String signUpForm(Model model) {
     model.addAttribute("memberForm", new MemberForm());
     return "members/signUp";
   }
@@ -39,6 +35,7 @@ public class MemberController {
   @PostMapping("/members/new")
   public String signUp(@ModelAttribute MemberForm memberForm, BindingResult bindingResult,
     RedirectAttributes redirectAttributes, Model model) {
+
     //Validation Logic
     if (!StringUtils.hasText(memberForm.getUserId())) {   //아이디 공백 미허용
       bindingResult.rejectValue("userId", "required");

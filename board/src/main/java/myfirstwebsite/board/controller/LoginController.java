@@ -23,11 +23,7 @@ public class LoginController {
   private final LoginService loginService;
 
   @GetMapping("/members/login")
-  public String loginForm(@ModelAttribute LoginForm form, HttpServletRequest request) {
-    HttpSession session = request.getSession(false);
-    if (session != null) {    //로그인 되어있으면 다시 홈으로
-      return "home";
-    }
+  public String loginForm(@ModelAttribute LoginForm form) {
     return "login/loginForm";
   }
 

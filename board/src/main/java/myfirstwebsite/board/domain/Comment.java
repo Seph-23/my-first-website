@@ -25,11 +25,11 @@ public class Comment {
   private LocalDateTime createdDate;    //커멘트 등록일
   private LocalDateTime modifiedDate;   //커멘트 수정일
 
-  @ManyToOne(fetch = LAZY)    //게시글과 연관관계 매핑
+  @ManyToOne    //게시글과 연관관계 매핑
   @JoinColumn(name = "board_id")
   private Board board;
 
-  @ManyToOne(fetch = LAZY)
+  @ManyToOne
   @JoinColumn(name = "member_id")
   private Member member;
 }

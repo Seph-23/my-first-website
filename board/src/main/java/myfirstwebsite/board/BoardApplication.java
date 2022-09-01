@@ -7,7 +7,6 @@ import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHtt
 @SpringBootApplication
 @EnableJdbcHttpSession
 public class BoardApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(BoardApplication.class, args);
 	}

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import myfirstwebsite.board.domain.Board;
 import myfirstwebsite.board.domain.Member;
 import myfirstwebsite.board.service.BoardService;
+import myfirstwebsite.board.service.MemberService;
 import myfirstwebsite.board.web.SessionConst;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class BoardController {
 
   private final BoardService boardService;
+  private final MemberService memberService;
 
   @GetMapping("/boards/new")
   public String boardForm(Model model, HttpServletRequest request) {
@@ -64,15 +66,9 @@ public class BoardController {
     }
 
     //Board Added Success Logic
-    Board board = new Board();
     HttpSession session = request.getSession(false);
     Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER); //세션에서 닉네임 가져오기
-    board.setTitle(boardForm.getTitle());
-    board.setAuthor(member.getUserName());
-    board.setContent(boardForm.getContent());
-    board.setCreatedDate(LocalDateTime.now());
-
-    boardService.postBoard(board);
+    boardService.postBoard(boardForm, member);
 
     return "redirect:/";
   }
