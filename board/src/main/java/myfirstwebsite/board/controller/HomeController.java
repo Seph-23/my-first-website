@@ -30,11 +30,11 @@ public class HomeController {
 
   @GetMapping("/home")
   public String homePage(Model model, HttpServletRequest request) {
-    HttpSession session = request.getSession(false);
-    if (session != null) {  //로그인 안됐을때 문제가 생김..
-      Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-      model.addAttribute("member", member);
-    }
+//    HttpSession session = request.getSession(false);
+//    if (session != null) {  //로그인 안됐을때 문제가 생김..
+//      Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+//      model.addAttribute("member", member);
+//    }
     return "home";
   }
 }

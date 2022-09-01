@@ -33,7 +33,7 @@ public class Board implements Serializable {
   private LocalDateTime createdDate;    //게시글 등록일
   private LocalDateTime modifiedDate;      //게시글 수정일
 
-  @ManyToOne
+  @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "member_id")
   private Member member;
 

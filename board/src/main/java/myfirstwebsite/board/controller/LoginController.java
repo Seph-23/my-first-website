@@ -23,7 +23,15 @@ public class LoginController {
   private final LoginService loginService;
 
   @GetMapping("/members/login")
-  public String loginForm(@ModelAttribute LoginForm form) {
+  public String loginForm(@ModelAttribute LoginForm form, HttpServletRequest request) {
+    HttpSession session = request.getSession(false);
+    if (session == null) {    //로그아웃 하자마자 로그인 할때 에러 방지.
+      return "login/loginForm";
+    }
+    Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+    if (member != null) {     //로그인 된 상태에서는 로그인 못하게.
+      return "home";
+    }
     return "login/loginForm";
   }
 
