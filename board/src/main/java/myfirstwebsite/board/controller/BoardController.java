@@ -7,8 +7,10 @@ import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import myfirstwebsite.board.domain.Board;
+import myfirstwebsite.board.domain.Comment;
 import myfirstwebsite.board.domain.Member;
 import myfirstwebsite.board.service.BoardService;
+import myfirstwebsite.board.service.CommentService;
 import myfirstwebsite.board.service.MemberService;
 import myfirstwebsite.board.web.SessionConst;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class BoardController {
 
   private final BoardService boardService;
-  private final MemberService memberService;
+  private final CommentService commentService;
 
   @GetMapping("/boards/new")
   public String boardForm(Model model, HttpServletRequest request) {
@@ -85,6 +87,11 @@ public class BoardController {
     Board board = boardService.findOne(boardId);
     board.increaseView();
     model.addAttribute("board", board);
+
+    //TODO
+    List<Comment> comments = commentService.findComments(boardId);
+    model.addAttribute("comments", comments);
+
     return "boards/boardDetail";
   }
 }

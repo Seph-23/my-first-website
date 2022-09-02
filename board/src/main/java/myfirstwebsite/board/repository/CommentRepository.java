@@ -3,7 +3,9 @@ package myfirstwebsite.board.repository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import myfirstwebsite.board.domain.Board;
 import myfirstwebsite.board.domain.Comment;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,12 +18,10 @@ public class CommentRepository {
     em.persist(comment);
   }
 
-  public Comment findComment(Long id) {
-    return em.find(Comment.class, id);
-  }
-
-  public List<Comment> findAll() {
-    return em.createQuery("select c from Comment c", Comment.class)
+  //TODO
+  public List<Comment> findAll(@Param("boardId") Long boardId) {
+    return em.createQuery("select c from Comment c where c.board.id = " + boardId
+        , Comment.class)
       .getResultList();
   }
 

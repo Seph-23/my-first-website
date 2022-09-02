@@ -22,11 +22,25 @@
   Content:
   <p th:text="${board.content}"></p>
 
+  <div class="container">
+    <form role="form" th:action="@{/boards/{id}/comments (id=${board.id})}"
+          th:object="${comments}" method="post">
+      <tr th:each="comment : ${comments}">
+        <td th:text="${comment.author}"></td>
+        <td th:text="${comment.content}"></td>
+      </tr>
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary">등록</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
   <div class="row">
     <div class="col">
       <button class="btn btn-primary" type="button"
               onclick="location.href='home.html'"
-              th:onclick="|location.href='@{/boards}'|"
               th:text="뒤로가기">뒤로가기</button>
     </div>
   </div>
