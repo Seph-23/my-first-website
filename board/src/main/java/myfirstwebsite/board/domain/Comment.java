@@ -32,4 +32,9 @@ public class Comment {
   @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "member_id")
   private Member member;
+
+  //생성 메서드
+//  public static Comment createComment(Member member, Board board) {
+//
+//  }
 }

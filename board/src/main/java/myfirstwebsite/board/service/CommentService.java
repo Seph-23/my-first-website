@@ -1,7 +1,9 @@
 package myfirstwebsite.board.service;
 
 import lombok.RequiredArgsConstructor;
-import myfirstwebsite.board.repository.BoardRepository;
+import myfirstwebsite.board.domain.Board;
+import myfirstwebsite.board.domain.Comment;
+import myfirstwebsite.board.domain.Member;
 import myfirstwebsite.board.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +11,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CommentService {
 
-  private final BoardRepository boardRepository;
   private final CommentRepository commentRepository;
 
+  public Long postComment(Member member, Board board) {
+    Comment comment = Comment.createComment(member, board);
+    commentRepository.save(comment);
+    return comment.getId();
+  }
 }
