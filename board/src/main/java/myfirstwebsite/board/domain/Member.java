@@ -22,13 +22,13 @@ public class Member implements Serializable {
   @Column(name = "member_id")
   private Long id;
 
-  @Column(nullable = false, length=30, unique = true)
+  @Column(nullable = false, unique = true)
   private String userId;
 
-  @Column(nullable = false, length=100)
+  @Column(nullable = false)
   private String password;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String userName;
 
   @Enumerated(EnumType.STRING)

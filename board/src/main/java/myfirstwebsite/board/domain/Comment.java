@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Data;
+import myfirstwebsite.board.controller.CommentForm;
 
 @Entity
 @Data
@@ -33,8 +34,23 @@ public class Comment {
   @JoinColumn(name = "member_id")
   private Member member;
 
+  //연관관계 편의 메서드
+  public void setMember(Member member) {
+    this.member = member;
+  }
+
+  public void setBoard(Board board) {
+    this.board = board;
+  }
+
   //생성 메서드
-//  public static Comment createComment(Member member, Board board) {
-//
-//  }
+  public static Comment createComment(Member member, Board board, CommentForm commentForm) {
+    Comment comment = new Comment();
+    comment.setMember(member);
+    comment.setBoard(board);
+    comment.setContent(commentForm.getContent());
+    comment.setAuthor(commentForm.getAuthor());
+    comment.setCreatedDate(LocalDateTime.now());
+    return comment;
+  }
 }
