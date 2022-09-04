@@ -7,12 +7,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-@Component
+//@Component
 public class BoardValidator implements Validator {
 
   @Override
   public boolean supports(Class<?> clazz) {
-    return Board.class.isAssignableFrom(clazz);
+    return BoardForm.class.isAssignableFrom(clazz);
   }
 
   @Override
