@@ -37,7 +37,7 @@
       </tr>
     </div>
   </div>
-  <div>
+  <div class="container">
     <form role="form" th:action="@{/boards/{id}/comments (id=${board.id})}"
           th:object="${commentForm}" method="post">
       <div class="form-group">

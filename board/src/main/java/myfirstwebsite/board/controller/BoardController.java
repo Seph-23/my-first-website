@@ -12,12 +12,16 @@ import myfirstwebsite.board.domain.Member;
 import myfirstwebsite.board.service.BoardService;
 import myfirstwebsite.board.service.CommentService;
 import myfirstwebsite.board.service.MemberService;
+import myfirstwebsite.board.validation.BoardValidator;
 import myfirstwebsite.board.web.SessionConst;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +34,12 @@ public class BoardController {
 
   private final BoardService boardService;
   private final CommentService commentService;
+  private final BoardValidator boardValidator;
+
+  @InitBinder
+  public void init(WebDataBinder dataBinder) {
+    dataBinder.addValidators(boardValidator);
+  }
 
   @GetMapping("/boards/new")
   public String boardForm(Model model, HttpServletRequest request) {
@@ -46,21 +56,8 @@ public class BoardController {
   }
 
   @PostMapping("/boards/new")
-  public String writeBoard(@ModelAttribute BoardForm boardForm, BindingResult bindingResult,
+  public String writeBoard(@Validated @ModelAttribute BoardForm boardForm, BindingResult bindingResult,
     RedirectAttributes redirectAttributes, Model model, HttpServletRequest request) {
-
-    //Validation Logic
-    //제목, 저자, 내용 공백 미허용
-    if (!StringUtils.hasText(boardForm.getTitle())) {
-      bindingResult.rejectValue("title", "required");
-    } else if (boardForm.getTitle().length() < 1 || boardForm.getTitle().length() > 30) {   //제목 길이 1~30
-      bindingResult.rejectValue("title", "range");
-    }
-    if (!StringUtils.hasText(boardForm.getContent())) {
-      bindingResult.rejectValue("content", "required");
-    } else if (boardForm.getContent().length() < 1 || boardForm.getContent().length() > 230) {    //게시판 내용 길이 1~230
-      bindingResult.rejectValue("content", "range");
-    }
 
     if (bindingResult.hasErrors()) {
       log.info("errors = {} ", bindingResult);
