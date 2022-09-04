@@ -24,7 +24,6 @@ public class CommentService {
     return comment.getId();
   }
 
-  //TODO
   public List<Comment> findComments(Long boardId) {
     return commentRepository.findAll(boardId);
   }

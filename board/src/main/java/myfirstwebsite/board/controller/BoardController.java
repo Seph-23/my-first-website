@@ -89,7 +89,6 @@ public class BoardController {
     model.addAttribute("board", board);
     model.addAttribute("commentForm", new CommentForm());
 
-    //TODO
     List<Comment> comments = commentService.findComments(boardId);
     if(comments != null && !comments.isEmpty()) {
       model.addAttribute("comments", comments);

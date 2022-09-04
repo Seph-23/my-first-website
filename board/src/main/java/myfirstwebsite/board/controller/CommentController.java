@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import myfirstwebsite.board.domain.Board;
+import myfirstwebsite.board.domain.Comment;
 import myfirstwebsite.board.domain.Member;
 import myfirstwebsite.board.service.BoardService;
 import myfirstwebsite.board.service.CommentService;
@@ -23,7 +24,6 @@ public class CommentController {
   private final BoardService boardService;
   private final CommentService commentService;
 
-  //TODO
   @PostMapping("/boards/{boardId}/comments")
   public String addComment(@ModelAttribute CommentForm commentForm,
     @PathVariable("boardId") Long boardId, Model model, HttpServletRequest request) {
@@ -33,9 +33,12 @@ public class CommentController {
     commentForm.setAuthor(member.getUserName());
     commentService.postComment(member, board, commentForm);
 
-    List<Board> boards = boardService.findBoards();
-    model.addAttribute("boards", boards);
-
-    return "boards/listBoard";
+    model.addAttribute("board", board);
+    model.addAttribute("commentForm", new CommentForm());
+    List<Comment> comments = commentService.findComments(boardId);
+    if (comments != null && !comments.isEmpty()) {
+      model.addAttribute("comments", comments);
+    }
+    return "boards/boardDetail";
   }
 }

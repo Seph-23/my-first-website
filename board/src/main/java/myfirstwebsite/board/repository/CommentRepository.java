@@ -18,7 +18,6 @@ public class CommentRepository {
     em.persist(comment);
   }
 
-  //TODO
   public List<Comment> findAll(@Param("boardId") Long boardId) {
     return em.createQuery("select c from Comment c where c.board.id = " + boardId
         , Comment.class)
