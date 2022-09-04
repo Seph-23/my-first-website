@@ -1,5 +1,6 @@
 package myfirstwebsite.board.controller;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -29,9 +30,11 @@ public class CommentController {
     HttpSession session = request.getSession(false);
     Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
     Board board = boardService.findOne(boardId);
+    commentForm.setAuthor(member.getUserName());
     commentService.postComment(member, board, commentForm);
 
-    model.addAttribute("board", board);
+    List<Board> boards = boardService.findBoards();
+    model.addAttribute("boards", boards);
 
     return "boards/listBoard";
   }

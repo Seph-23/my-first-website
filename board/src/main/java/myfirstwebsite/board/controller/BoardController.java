@@ -87,11 +87,13 @@ public class BoardController {
     Board board = boardService.findOne(boardId);
     board.increaseView();
     model.addAttribute("board", board);
+    model.addAttribute("commentForm", new CommentForm());
 
     //TODO
     List<Comment> comments = commentService.findComments(boardId);
-    model.addAttribute("comments", comments);
-
+    if(comments != null && !comments.isEmpty()) {
+      model.addAttribute("comments", comments);
+    }
     return "boards/boardDetail";
   }
 }
