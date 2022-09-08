@@ -72,14 +72,17 @@ public class BoardController {
       bindingResult.rejectValue("content", "range");
     }
 
+    //세션에서 로그인 유저 객체 가져오기
+    HttpSession session = request.getSession(false);
+    Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER); //세션에서 닉네임 가져오기
+
     if (bindingResult.hasErrors()) {
       log.info("errors = {} ", bindingResult);
+      model.addAttribute(member);
       return "boards/postBoard";
     }
 
     //Board Added Success Logic
-    HttpSession session = request.getSession(false);
-    Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER); //세션에서 닉네임 가져오기
     boardService.postBoard(boardForm, member);
 
     return "redirect:/";
