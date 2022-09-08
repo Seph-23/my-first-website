@@ -21,6 +21,17 @@
   Content:
   <p th:text="${board.content}"></p>
 
+  <!-- TODO -->
+  <div th:object="${member}">
+    <span>
+      <form>
+        <button type="submit" class="btn btn-danger" th:if="${member != 'null'}">
+          삭제
+        </button>
+      </form>
+    </span>
+  </div>
+
   <br>
   <h3>댓글</h3>
   <div class="container">

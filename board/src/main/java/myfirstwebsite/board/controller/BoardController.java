@@ -2,6 +2,7 @@ package myfirstwebsite.board.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -84,11 +85,22 @@ public class BoardController {
   }
 
   @GetMapping("/boards/{boardId}")
-  public String boardDetail(@PathVariable("boardId") Long boardId, Model model) {
+  public String boardDetail(@PathVariable("boardId") Long boardId, Model model,
+    HttpServletRequest request) {
     Board board = boardService.findOne(boardId);
     board.increaseView();
     model.addAttribute("board", board);
     model.addAttribute("commentForm", new CommentForm());
+
+    //TODO 게시글 수정
+    //현재 로그인 한 유저
+    HttpSession session = request.getSession(false);
+    Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+    //현재 게시글을 등록한 유저
+    Long member2 = board.getMember().getId();
+    if (member.getId() == member2) {
+      model.addAttribute("member", member);
+    }
 
     List<Comment> comments = commentService.findComments(boardId);
     if(comments != null && !comments.isEmpty()) {

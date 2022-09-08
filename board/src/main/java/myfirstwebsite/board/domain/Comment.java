@@ -3,6 +3,7 @@ package myfirstwebsite.board.domain;
 import static javax.persistence.FetchType.LAZY;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import myfirstwebsite.board.controller.CommentForm;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Data
