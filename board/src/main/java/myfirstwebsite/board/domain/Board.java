@@ -50,6 +50,7 @@ public class Board implements Serializable {
     board.setAuthor(member.getUserName());
     board.setContent(boardForm.getContent());
     board.setCreatedDate(LocalDateTime.now());
+    board.setModifiedDate(LocalDateTime.now());
     return board;
   }
 

@@ -50,6 +50,7 @@ public class LoginController {
       return "login/loginForm";
     }
 
+    //로그인 할때 세션에 로그인 한 유저 객체 저장
     HttpSession session = request.getSession();
     session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 

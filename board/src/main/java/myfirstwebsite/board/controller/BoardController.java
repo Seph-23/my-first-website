@@ -34,12 +34,12 @@ public class BoardController {
 
   private final BoardService boardService;
   private final CommentService commentService;
-//  private final BoardValidator boardValidator;
+  private final BoardValidator boardValidator;
 
-//  @InitBinder
-//  public void init(WebDataBinder dataBinder) {
-//    dataBinder.addValidators(boardValidator);
-//  }
+  @InitBinder("boardForm")    //boardForm 객체만 검증하도록.
+  public void init(WebDataBinder dataBinder) {
+    dataBinder.addValidators(boardValidator);
+  }
 
   @GetMapping("/boards/new")
   public String boardForm(Model model, HttpServletRequest request) {
@@ -56,25 +56,13 @@ public class BoardController {
   }
 
   @PostMapping("/boards/new")
-  public String writeBoard(@ModelAttribute BoardForm boardForm, BindingResult bindingResult,
-    RedirectAttributes redirectAttributes, Model model, HttpServletRequest request) {
-
-    //Validation Logic
-    //제목, 저자, 내용 공백 미허용
-    if (!StringUtils.hasText(boardForm.getTitle())) {
-      bindingResult.rejectValue("title", "required");
-    } else if (boardForm.getTitle().length() < 1 || boardForm.getTitle().length() > 30) {   //제목 길이 1~30
-      bindingResult.rejectValue("title", "range");
-    }
-    if (!StringUtils.hasText(boardForm.getContent())) {
-      bindingResult.rejectValue("content", "required");
-    } else if (boardForm.getContent().length() < 1 || boardForm.getContent().length() > 230) {    //게시판 내용 길이 1~230
-      bindingResult.rejectValue("content", "range");
-    }
+  public String writeBoard(@Validated @ModelAttribute BoardForm boardForm,
+    BindingResult bindingResult, RedirectAttributes redirectAttributes,
+    Model model, HttpServletRequest request) {
 
     //세션에서 로그인 유저 객체 가져오기
     HttpSession session = request.getSession(false);
-    Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER); //세션에서 닉네임 가져오기
+    Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER); //세션에서 멤버 객체 가져오기
 
     if (bindingResult.hasErrors()) {
       log.info("errors = {} ", bindingResult);
