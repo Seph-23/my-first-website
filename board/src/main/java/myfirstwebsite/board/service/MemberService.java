@@ -2,6 +2,7 @@ package myfirstwebsite.board.service;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import myfirstwebsite.board.controller.MemberForm;
 import myfirstwebsite.board.domain.Member;
 import myfirstwebsite.board.repository.MemberRepository;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,8 @@ public class MemberService {
    * 회원가입!
    */
   @Transactional
-  public Long signUp(Member member) {
+  public Long signUp(MemberForm memberForm) {
+    Member member = Member.createMember(memberForm);
     memberRepository.save(member);
     return member.getId();
   }

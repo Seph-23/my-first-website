@@ -51,6 +51,7 @@ public class Comment {
     comment.setContent(commentForm.getContent());
     comment.setAuthor(commentForm.getAuthor());
     comment.setCreatedDate(LocalDateTime.now());
+    comment.setModifiedDate(LocalDateTime.now());
     return comment;
   }
 }

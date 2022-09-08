@@ -62,13 +62,7 @@ public class MemberController {
     }
 
     //SignUp Success Logic
-    Member member = new Member();
-    member.setUserId(memberForm.getUserId());
-    member.setPassword(memberForm.getPassword());
-    member.setUserName(memberForm.getUserName());
-    member.setRole(Role.USER);
-
-    memberService.signUp(member);
+    memberService.signUp(memberForm);
 
     return "redirect:/";
   }

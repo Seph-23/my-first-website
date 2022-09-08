@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.ToString;
+import myfirstwebsite.board.controller.MemberForm;
 
 @Entity
 @Data
@@ -37,4 +38,14 @@ public class Member implements Serializable {
   @OneToMany(mappedBy = "member")
   @ToString.Exclude
   private List<Board> board = new ArrayList<>();
+
+  //생성 메서드
+  public static Member createMember(MemberForm memberForm) {
+    Member member = new Member();
+    member.setUserId(memberForm.getUserId());
+    member.setPassword(memberForm.getPassword());
+    member.setUserName(memberForm.getUserName());
+    member.setRole(Role.USER);
+    return member;
+  }
 }

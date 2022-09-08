@@ -19,8 +19,8 @@ public class CommentRepository {
   }
 
   public List<Comment> findAll(@Param("boardId") Long boardId) {
-    return em.createQuery("select c from Comment c where c.board.id = " + boardId
-        , Comment.class)
+    return em.createQuery("select c from Comment c where c.board.id = " + boardId,
+        Comment.class)
       .getResultList();
   }
 
