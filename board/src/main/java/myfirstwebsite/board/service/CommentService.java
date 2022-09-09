@@ -29,6 +29,7 @@ public class CommentService {
   }
 
   //TODO
+  @Transactional
   public void delete(Long boardId) {
     commentRepository.delete(boardId);
   }

@@ -1,5 +1,7 @@
 package myfirstwebsite.board.domain;
 
+import static javax.persistence.FetchType.LAZY;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,7 @@ public class Member implements Serializable {
   @Enumerated(EnumType.STRING)
   private Role role;
 
-  @OneToMany(mappedBy = "member")
+  @OneToMany(mappedBy = "member", fetch = LAZY)
   @ToString.Exclude
   private List<Board> board = new ArrayList<>();
 

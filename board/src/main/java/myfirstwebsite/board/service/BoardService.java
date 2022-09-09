@@ -38,6 +38,7 @@ public class BoardService {
   }
 
   //TODO
+  @Transactional
   public void delete(Long boardId) {
     boardRepository.delete(boardId);
   }
