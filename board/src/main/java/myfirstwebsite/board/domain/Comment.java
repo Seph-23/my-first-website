@@ -4,6 +4,7 @@ import static javax.persistence.FetchType.LAZY;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import myfirstwebsite.board.controller.CommentForm;
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -30,7 +32,7 @@ public class Comment {
   private LocalDateTime createdDate;    //커멘트 등록일
   private LocalDateTime modifiedDate;   //커멘트 수정일
 
-  @ManyToOne(fetch = LAZY)    //게시글과 연관관계 매핑
+  @ManyToOne(fetch = LAZY, cascade = CascadeType.REMOVE)    //게시글과 연관관계 매핑
   @JoinColumn(name = "board_id")
   private Board board;
 

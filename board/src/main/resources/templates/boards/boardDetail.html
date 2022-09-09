@@ -22,14 +22,12 @@
   <p th:text="${board.content}"></p>
 
   <!-- TODO -->
-  <div th:object="${member}">
-    <span>
-      <form>
-        <button type="submit" class="btn btn-danger" th:if="${member != 'null'}">
-          삭제
-        </button>
-      </form>
-    </span>
+  <div th:object="${member}" th:if="${member != 'none'}">
+    <form role="form" th:action="@{/boards/{id}/delete (id=${board.id})}">
+      <button type="submit" class="btn btn-danger">
+        삭제
+      </button>
+    </form>
   </div>
 
   <br>

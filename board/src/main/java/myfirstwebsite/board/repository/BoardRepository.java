@@ -16,10 +16,6 @@ public class BoardRepository {
     em.persist(board);
   }
 
-  public Board findBoard(Long id) {
-    return em.find(Board.class, id);
-  }
-
   public List<Board> findAll() {
     return em.createQuery("select b from Board b", Board.class)
       .getResultList();
@@ -27,5 +23,10 @@ public class BoardRepository {
 
   public Board findOne(Long id) {
     return em.find(Board.class, id);
+  }
+
+  //TODO
+  public void delete(Long boardId) {
+    em.remove(findOne(boardId));
   }
 }

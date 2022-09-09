@@ -20,11 +20,18 @@ public class CommentRepository {
 
   public List<Comment> findAll(@Param("boardId") Long boardId) {
     return em.createQuery("select c from Comment c where c.board.id = " + boardId,
-        Comment.class)
-      .getResultList();
+        Comment.class).getResultList();
   }
 
   public Comment findOne(Long id) {
     return em.find(Comment.class, id);
+  }
+
+  //TODO
+  public void delete(Long boardId) {
+    List<Comment> comments = findAll(boardId);
+    for (Comment comment : comments) {
+      em.remove(comment);
+    }
   }
 }

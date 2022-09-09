@@ -15,17 +15,20 @@ import myfirstwebsite.board.service.CommentService;
 import myfirstwebsite.board.service.MemberService;
 import myfirstwebsite.board.validation.BoardValidator;
 import myfirstwebsite.board.web.SessionConst;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
@@ -97,9 +100,11 @@ public class BoardController {
     HttpSession session = request.getSession(false);
     Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
     //현재 게시글을 등록한 유저
-    Long member2 = board.getMember().getId();
-    if (member.getId() == member2) {
+    Long memberTwoId = board.getMember().getId();
+    if (Objects.equals(member.getId(), memberTwoId)) {
       model.addAttribute("member", member);
+    } else {
+      model.addAttribute("member", "none");
     }
 
     List<Comment> comments = commentService.findComments(boardId);
@@ -107,5 +112,13 @@ public class BoardController {
       model.addAttribute("comments", comments);
     }
     return "boards/boardDetail";
+  }
+
+  //TODO
+  @RequestMapping("/boards/{id}/delete")
+  public String boardDelete(@PathVariable("id") Long boardId) {
+    commentService.delete(boardId);
+    boardService.delete(boardId);
+    return "redirect:/boards";
   }
 }

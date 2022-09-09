@@ -27,4 +27,9 @@ public class CommentService {
   public List<Comment> findComments(Long boardId) {
     return commentRepository.findAll(boardId);
   }
+
+  //TODO
+  public void delete(Long boardId) {
+    commentRepository.delete(boardId);
+  }
 }
