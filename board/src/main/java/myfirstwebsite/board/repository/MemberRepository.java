@@ -28,4 +28,13 @@ public class MemberRepository {
   public Optional<Member> findByLoginId(String loginId) {
     return findAll().stream().filter(m -> m.getUserId().equals(loginId)).findFirst();
   }
+
+  //TODO
+  public boolean checkIfUserIdExist(String userId) {
+    Optional<Member>  optional = findByLoginId(userId);
+    if(optional.isEmpty()) {
+      return false;
+    }
+    return true;
+  }
 }

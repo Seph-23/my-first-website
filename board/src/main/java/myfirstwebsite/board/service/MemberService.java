@@ -32,4 +32,10 @@ public class MemberService {
     return memberRepository.findAll();
   }
 
+
+  //TODO
+  public boolean checkIfExist(String userId) {
+    return memberRepository.checkIfUserIdExist(userId);
+  }
+
 }

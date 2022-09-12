@@ -1,9 +1,12 @@
 package myfirstwebsite.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +25,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
@@ -72,5 +79,18 @@ public class MemberController {
     List<Member> members = memberService.findAllMembers();
     model.addAttribute("members", members);
     return "members/membersList";
+  }
+
+
+  //TODO
+  @ResponseBody
+  @PostMapping(value = {"/checkDup"})
+  public Map<String, Object> checkDup(@RequestParam Map<String, Object> params,
+    HttpServletRequest request, HttpServletResponse response){
+    Map<String, Object> result = new HashMap<String, Object>();
+    result.put("resultCd", "200");
+    result.put("resultMsg", "post 통신이 성공하였습니다.");
+    System.out.println(params);
+    return result;
   }
 }

@@ -5,6 +5,10 @@
   <link th:href="@{/css/bootstrap.min.css}"
         href="../css/bootstrap.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="#">
+
+  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
   <style>
     .container {
       max-width: 560px;
@@ -25,6 +29,12 @@
       <input type="text" id="userId" th:field="*{userId}"
              th:errorclass="field-error"
              class="form-control" placeholder="아이디를 입력하세요">
+
+      <!-- TODO -->
+      <button id="btnDup" onclick="checkDup()" class="btn btn-secondary">
+        중복확인
+      </button>
+
       <div class="field-error" th:errors="*{userId}">
         아이디 오류
       </div>
@@ -62,5 +72,27 @@
 
   </form>
 </div>    <!-- container -->
+
+<!-- JQuery, AJAX -->
+<script type="text/javascript">
+  function checkDup(){
+    var params = {
+      id : $('userId').val()
+    }
+
+    $.ajax({
+      url: "/checkDup",
+      type: "POST",
+      data: params,
+      success: function(data){
+        console.log(data.resultCd);
+        console.log(data.resultMsg);
+      },
+      error: function(){
+        alert("데이터 통신중 에러발생");
+      }
+    });
+  }
+</script>
 </body>
 </html>
