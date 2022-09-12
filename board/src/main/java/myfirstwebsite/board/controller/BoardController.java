@@ -1,6 +1,5 @@
 package myfirstwebsite.board.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
@@ -12,17 +11,13 @@ import myfirstwebsite.board.domain.Comment;
 import myfirstwebsite.board.domain.Member;
 import myfirstwebsite.board.service.BoardService;
 import myfirstwebsite.board.service.CommentService;
-import myfirstwebsite.board.service.MemberService;
 import myfirstwebsite.board.validation.BoardValidator;
 import myfirstwebsite.board.web.SessionConst;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -95,7 +90,7 @@ public class BoardController {
     model.addAttribute("board", board);
     model.addAttribute("commentForm", new CommentForm());
 
-    //TODO 게시글 수정
+    //TODO
     //현재 로그인 한 유저
     HttpSession session = request.getSession(false);
     Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
@@ -117,7 +112,7 @@ public class BoardController {
   //TODO
   @RequestMapping("/boards/{id}/delete")
   public String boardDelete(@PathVariable("id") Long boardId) {
-    commentService.delete(boardId);
+    commentService.deleteWithBoard(boardId);
     boardService.delete(boardId);
     return "redirect:/boards";
   }

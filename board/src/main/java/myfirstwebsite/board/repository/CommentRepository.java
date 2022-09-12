@@ -3,7 +3,6 @@ package myfirstwebsite.board.repository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
-import myfirstwebsite.board.domain.Board;
 import myfirstwebsite.board.domain.Comment;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -28,7 +27,7 @@ public class CommentRepository {
   }
 
   //TODO
-  public void delete(Long boardId) {
+  public void deleteWithBoard(Long boardId) {
     List<Comment> comments = findAll(boardId);
     for (Comment comment : comments) {
       em.remove(comment);

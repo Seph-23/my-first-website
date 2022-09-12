@@ -14,13 +14,6 @@
 </head>
 <body>
 <div class="container">
-  <h1>게시글 상세보기</h1>
-  <h6 th:text="|Author: ${board.author}  Views: ${board.views}
-  Created On: ${board.createdDate}|"></h6>
-  <h3 th:text="|제목: ${board.title}|"></h3>
-  Content:
-  <p th:text="${board.content}"></p>
-
   <!-- TODO -->
   <div th:object="${member}" th:if="${member != 'none'}">
     <form role="form" th:action="@{/boards/{id}/delete (id=${board.id})}">
@@ -29,6 +22,13 @@
       </button>
     </form>
   </div>
+
+  <h1>게시글 상세보기</h1>
+  <h6 th:text="|Author: ${board.author}  Views: ${board.views}
+  Created On: ${board.createdDate}|"></h6>
+  <h3 th:text="|제목: ${board.title}|"></h3>
+  Content:
+  <p th:text="${board.content}"></p>
 
   <br>
   <h3>댓글</h3>

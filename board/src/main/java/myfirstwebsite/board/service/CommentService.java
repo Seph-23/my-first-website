@@ -30,7 +30,7 @@ public class CommentService {
 
   //TODO
   @Transactional
-  public void delete(Long boardId) {
-    commentRepository.delete(boardId);
+  public void deleteWithBoard(Long boardId) {
+    commentRepository.deleteWithBoard(boardId);
   }
 }
