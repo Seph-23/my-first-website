@@ -28,7 +28,6 @@ public class CommentService {
     return commentRepository.findAll(boardId);
   }
 
-  //TODO
   @Transactional
   public void deleteWithBoard(Long boardId) {
     commentRepository.deleteWithBoard(boardId);

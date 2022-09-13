@@ -14,7 +14,6 @@
 </head>
 <body>
 <div class="container">
-  <!-- TODO -->
   <div class="row" th:object="${member}" th:if="${member != 'none'}">
     <div class="col">
       <form role="form" th:action="@{/boards/{id}/delete (id=${board.id})}">
@@ -40,21 +39,24 @@
   <p th:text="${board.content}"></p>
 
   <br>
-  <h3>댓글</h3>
   <div class="container">
     <div th:object="${comments}">
-      <thead>
-      <tr>
-        <th>Author</th>
-        <th>Content</th>
-      </tr>
-      </thead>
-      <tr th:each="comment : ${comments}"><br>
-        <td th:text="${comment.author}"></td>
-        <td th:text="${comment.content}"></td>
-      </tr>
+      <b>댓글</b>
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>Author</th>
+          <th>Content</th>
+        </tr>
+        </thead>
+        <tr th:each="comment : ${comments}"><br>
+          <td th:text="${comment.author}"></td>
+          <td th:text="${comment.content}"></td>
+        </tr>
+      </table>
     </div>
   </div>
+
   <div class="container">
     <form role="form" th:action="@{/boards/{id}/comments (id=${board.id})}"
           th:object="${commentForm}" method="post">

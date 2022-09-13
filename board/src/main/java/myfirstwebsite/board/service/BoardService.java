@@ -37,13 +37,11 @@ public class BoardService {
     return boardRepository.findOne(boardId);
   }
 
-  //TODO 게시글 삭제
   @Transactional
   public void delete(Long boardId) {
     boardRepository.delete(boardId);
   }
 
-  //TODO 게시글 수정
   public Board update(Long boardId, BoardForm boardForm) {
     return boardRepository.update(boardId, boardForm);
   }

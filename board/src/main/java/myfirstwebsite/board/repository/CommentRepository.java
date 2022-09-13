@@ -26,7 +26,6 @@ public class CommentRepository {
     return em.find(Comment.class, id);
   }
 
-  //TODO
   public void deleteWithBoard(Long boardId) {
     List<Comment> comments = findAll(boardId);
     for (Comment comment : comments) {

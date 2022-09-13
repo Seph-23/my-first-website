@@ -72,7 +72,7 @@ public class BoardController {
     //Board Added Success Logic
     boardService.postBoard(boardForm, member);
 
-    return "redirect:/";
+    return "redirect:/home";
   }
 
   @GetMapping("/boards")
@@ -90,7 +90,6 @@ public class BoardController {
     model.addAttribute("board", board);
     model.addAttribute("commentForm", new CommentForm());
 
-    //TODO
     //현재 로그인 한 유저
     HttpSession session = request.getSession(false);
     Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
@@ -109,7 +108,6 @@ public class BoardController {
     return "boards/boardDetail";
   }
 
-  //TODO 게시글 삭제
   @RequestMapping("/boards/{id}/delete")
   public String boardDelete(@PathVariable("id") Long boardId) {
     commentService.deleteWithBoard(boardId);
@@ -117,7 +115,6 @@ public class BoardController {
     return "redirect:/boards";
   }
 
-  //TODO 게시글 수정
   @GetMapping("/boards/{id}/update")
   public String boardUpdate(@PathVariable("id") Long boardId, Model model) {
     Board board = boardService.findOne(boardId);
@@ -127,11 +124,19 @@ public class BoardController {
     return "boards/boardUpdate";
   }
 
-  //TODO 게시글 수정
   @PostMapping("/boards/{id}/update")
-  public String boardUpdate(@Validated @ModelAttribute BoardForm boardForm,
-    BindingResult bindingResult, @PathVariable("id") Long boardId,
-    Model model, HttpServletRequest request) {
+  public String boardUpdate(@PathVariable("id") Long boardId,
+    @Validated @ModelAttribute BoardForm boardForm, BindingResult bindingResult, Model model,
+    HttpServletRequest request) {
+
+    if (bindingResult.hasErrors()) {
+      log.info("errors = {} ", bindingResult);
+      Board board = boardService.findOne(boardId);
+      model.addAttribute(board);
+      model.addAttribute(board.getMember());
+      model.addAttribute(boardForm);
+      return "boards/boardUpdate";
+    }
 
     //Update
     Board board = boardService.update(boardId, boardForm);

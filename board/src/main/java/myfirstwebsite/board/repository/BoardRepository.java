@@ -5,7 +5,6 @@ import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import myfirstwebsite.board.controller.BoardForm;
 import myfirstwebsite.board.domain.Board;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -27,12 +26,10 @@ public class BoardRepository {
     return em.find(Board.class, id);
   }
 
-  //TODO 게시글 삭제
   public void delete(Long boardId) {
     em.remove(findOne(boardId));
   }
 
-  //TODO 게시글 수정
   public Board update(Long boardId, BoardForm boardForm) {
     Board board = findOne(boardId);
     board.updateBoard(board, boardForm);
