@@ -41,7 +41,7 @@ public class BoardController {
   }
 
   @GetMapping("/boards/new")
-  public String boardForm(Model model, HttpServletRequest request) {
+  public String writeBoard(Model model, HttpServletRequest request) {
     model.addAttribute("boardForm", new BoardForm());
 
     //세션에서 회원 오브젝트 가져오기
@@ -103,17 +103,50 @@ public class BoardController {
     }
 
     List<Comment> comments = commentService.findComments(boardId);
-    if(comments != null && !comments.isEmpty()) {
+    if (comments != null && !comments.isEmpty()) {
       model.addAttribute("comments", comments);
     }
     return "boards/boardDetail";
   }
 
-  //TODO
+  //TODO 게시글 삭제
   @RequestMapping("/boards/{id}/delete")
   public String boardDelete(@PathVariable("id") Long boardId) {
     commentService.deleteWithBoard(boardId);
     boardService.delete(boardId);
     return "redirect:/boards";
+  }
+
+  //TODO 게시글 수정
+  @GetMapping("/boards/{id}/update")
+  public String boardUpdate(@PathVariable("id") Long boardId, Model model) {
+    Board board = boardService.findOne(boardId);
+    model.addAttribute(board);
+    model.addAttribute(board.getMember());
+    model.addAttribute("boardForm", new BoardForm());
+    return "boards/boardUpdate";
+  }
+
+  //TODO 게시글 수정
+  @PostMapping("/boards/{id}/update")
+  public String boardUpdate(@Validated @ModelAttribute BoardForm boardForm,
+    BindingResult bindingResult, @PathVariable("id") Long boardId,
+    Model model, HttpServletRequest request) {
+
+    //Update
+    Board board = boardService.update(boardId, boardForm);
+
+    //After Update
+    model.addAttribute(board);
+    model.addAttribute("commentForm", new CommentForm());
+    List<Comment> comments = commentService.findComments(boardId);
+    if (comments != null && !comments.isEmpty()) {
+      model.addAttribute("comments", comments);
+    }
+    HttpSession session = request.getSession(false);
+    Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+    model.addAttribute(member);
+
+    return "/boards/boardDetail";
   }
 }

@@ -31,9 +31,9 @@
              class="form-control" placeholder="아이디를 입력하세요">
 
       <!-- TODO -->
-      <button id="btnDup" onclick="checkDup()" class="btn btn-secondary">
-        중복확인
-      </button>
+<!--      <button id="btnDup" onclick="checkDup()" class="btn btn-secondary">-->
+<!--        중복확인-->
+<!--      </button>-->
 
       <div class="field-error" th:errors="*{userId}">
         아이디 오류
@@ -74,25 +74,25 @@
 </div>    <!-- container -->
 
 <!-- JQuery, AJAX -->
-<script type="text/javascript">
-  function checkDup(){
-    var params = {
-      id : $('userId').val()
-    }
+<!--<script type="text/javascript">-->
+<!--  function checkDup(){-->
+<!--    var params = {-->
+<!--      id : $('userId').val()-->
+<!--    }-->
 
-    $.ajax({
-      url: "/checkDup",
-      type: "POST",
-      data: params,
-      success: function(data){
-        console.log(data.resultCd);
-        console.log(data.resultMsg);
-      },
-      error: function(){
-        alert("데이터 통신중 에러발생");
-      }
-    });
-  }
-</script>
+<!--    $.ajax({-->
+<!--      url: "/checkDup",-->
+<!--      type: "POST",-->
+<!--      data: params,-->
+<!--      success: function(data){-->
+<!--        console.log(data.resultCd);-->
+<!--        console.log(data.resultMsg);-->
+<!--      },-->
+<!--      error: function(){-->
+<!--        alert("데이터 통신중 에러발생");-->
+<!--      }-->
+<!--    });-->
+<!--  }-->
+<!--</script>-->
 </body>
 </html>

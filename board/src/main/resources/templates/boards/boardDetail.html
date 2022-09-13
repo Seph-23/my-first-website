@@ -15,12 +15,21 @@
 <body>
 <div class="container">
   <!-- TODO -->
-  <div th:object="${member}" th:if="${member != 'none'}">
-    <form role="form" th:action="@{/boards/{id}/delete (id=${board.id})}">
-      <button type="submit" class="btn btn-danger">
-        삭제
-      </button>
-    </form>
+  <div class="row" th:object="${member}" th:if="${member != 'none'}">
+    <div class="col">
+      <form role="form" th:action="@{/boards/{id}/delete (id=${board.id})}">
+        <button type="submit" class="btn btn-danger">
+          삭제
+        </button>
+      </form>
+    </div>
+    <div class="col">
+      <form role="form" th:action="@{/boards/{id}/update (id=${board.id})}">
+        <button type="submit" class="btn btn-danger">
+          수정
+        </button>
+      </form>
+    </div>
   </div>
 
   <h1>게시글 상세보기</h1>

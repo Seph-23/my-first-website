@@ -54,6 +54,12 @@ public class Board implements Serializable {
     return board;
   }
 
+  //게시글 수정 메서드
+  public void updateBoard(Board board, BoardForm boardForm) {
+    board.setTitle(boardForm.getTitle());
+    board.setContent(boardForm.getContent());
+  }
+
   //조회수 증가
   public void increaseView() {
     views++;
