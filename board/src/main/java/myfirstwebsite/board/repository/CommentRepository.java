@@ -32,4 +32,9 @@ public class CommentRepository {
       em.remove(comment);
     }
   }
+
+  //TODO 댓글 삭제
+  public void delete(Long commentId) {
+    em.remove(findOne(commentId));
+  }
 }

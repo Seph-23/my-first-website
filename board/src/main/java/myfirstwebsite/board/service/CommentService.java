@@ -24,6 +24,10 @@ public class CommentService {
     return comment.getId();
   }
 
+  public Comment findOne(Long commentId) {
+    return commentRepository.findOne(commentId);
+  }
+
   public List<Comment> findComments(Long boardId) {
     return commentRepository.findAll(boardId);
   }
@@ -31,5 +35,11 @@ public class CommentService {
   @Transactional
   public void deleteWithBoard(Long boardId) {
     commentRepository.deleteWithBoard(boardId);
+  }
+
+  //TODO 댓글 삭제
+  @Transactional
+  public void delete(Long commentId) {
+    commentRepository.delete(commentId);
   }
 }

@@ -75,7 +75,6 @@ public class MemberController {
     return "members/membersList";
   }
 
-
   //TODO
   @ResponseBody
   @PostMapping(value = {"/checkDup"})

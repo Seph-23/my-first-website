@@ -152,6 +152,6 @@ public class BoardController {
     Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
     model.addAttribute(member);
 
-    return "/boards/boardDetail";
+    return "boards/boardDetail";
   }
 }
