@@ -96,7 +96,7 @@ public class BoardController {
     //현재 게시글을 등록한 유저
     Long memberTwoId = board.getMember().getId();
     if (Objects.equals(member.getId(), memberTwoId)) {
-      model.addAttribute("member", member);
+      model.addAttribute("member", memberTwoId);
     } else {
       model.addAttribute("member", "none");
     }

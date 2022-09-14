@@ -5,6 +5,7 @@
   <link th:href="@{/css/bootstrap.min.css}"
         href="../css/bootstrap.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="#">
+
   <style>
     .container {
       max-width: 560px;
@@ -58,12 +59,10 @@
           <td th:text="${comment.content}"></td>
           <!-- TODO 댓글 삭제 -->
           <td>
-            <form role="form" th:action="@{/comments/{id}/delete (id=${comment.id})}"
-                  method="post">
+            <form role="form" th:action="@{/comments/{id}/delete (id=${comment.id})}" method="post">
               <button type="submit" class="btn btn-secondary">삭제</button>
             </form>
           </td>
-
         </tr>
       </table>
     </div>
@@ -94,4 +93,12 @@
   </div>
 </div>
 </body>
+
+<!-- TODO -->
+<script type="text/javascript">
+  function commentError() {
+    alert("삭제할 수 없는 댓글입니다.");
+  }
+</script>
+
 </html>

@@ -12,15 +12,11 @@ import myfirstwebsite.board.domain.Member;
 import myfirstwebsite.board.service.BoardService;
 import myfirstwebsite.board.service.CommentService;
 import myfirstwebsite.board.web.SessionConst;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @Controller
@@ -40,6 +36,14 @@ public class CommentController {
     commentForm.setAuthor(member.getUserName());
     commentService.postComment(member, board, commentForm);
 
+    //현재 게시글을 등록한 유저인지 재확인.
+    Long memberTwoId = board.getMember().getId();
+    if (Objects.equals(member.getId(), memberTwoId)) {
+      model.addAttribute("member", memberTwoId);
+    } else {
+      model.addAttribute("member", "none");
+    }
+
     model.addAttribute("board", board);
     model.addAttribute("commentForm", new CommentForm());
     List<Comment> comments = commentService.findComments(boardId);
@@ -51,7 +55,7 @@ public class CommentController {
 
   //TODO 댓글 삭제
   @PostMapping("/comments/{id}/delete")
-  public String commentDelete(@PathVariable("id") Long commentId, Model model,
+  public String commentDelete (@PathVariable("id") Long commentId, Model model,
     HttpServletRequest request) {
 
     HttpSession session = request.getSession(false);
@@ -62,8 +66,17 @@ public class CommentController {
     model.addAttribute("board", board);
     model.addAttribute("commentForm", new CommentForm());
 
+    //현재 게시글을 등록한 유저인지 재확인.
+    Long memberTwoId = board.getMember().getId();
+    if (Objects.equals(member.getId(), memberTwoId)) {
+      model.addAttribute("member", memberTwoId);
+    } else {
+      model.addAttribute("member", "none");
+    }
+
     if (Objects.equals(commentMember, member.getId())) {
       commentService.delete(commentId);
+      model.addAttribute("delete", "yes");    //TODO
       List<Comment> comments = commentService.findComments(board.getId());
       if (comments != null && !comments.isEmpty()) {
         model.addAttribute("comments", comments);
@@ -71,6 +84,7 @@ public class CommentController {
       return "boards/boardDetail";
     }
 
+    model.addAttribute("delete", "no");       //TODO
     List<Comment> comments = commentService.findComments(board.getId());
     if (comments != null && !comments.isEmpty()) {
       model.addAttribute("comments", comments);
