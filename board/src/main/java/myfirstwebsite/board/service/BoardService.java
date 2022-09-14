@@ -37,12 +37,24 @@ public class BoardService {
     return boardRepository.findOne(boardId);
   }
 
+  /**
+   * 게시글 삭제!
+   * @param boardId
+   */
   @Transactional
   public void delete(Long boardId) {
     boardRepository.delete(boardId);
   }
 
+  /**
+   * 게시글 수정!
+   * @param boardId
+   * @param boardForm
+   * @return
+   */
+  @Transactional
   public Board update(Long boardId, BoardForm boardForm) {
     return boardRepository.update(boardId, boardForm);
   }
+
 }

@@ -17,6 +17,13 @@ public class CommentService {
 
   private final CommentRepository commentRepository;
 
+  /**
+   * 댓글 등록!
+   * @param member
+   * @param board
+   * @param commentForm
+   * @return
+   */
   @Transactional
   public Long postComment(Member member, Board board, CommentForm commentForm) {
     Comment comment = Comment.createComment(member, board, commentForm);
@@ -32,12 +39,19 @@ public class CommentService {
     return commentRepository.findAll(boardId);
   }
 
+  /**
+   * 게시글 삭제할때 해당 게시글에 있는 댓글 삭제!
+   * @param boardId
+   */
   @Transactional
   public void deleteWithBoard(Long boardId) {
     commentRepository.deleteWithBoard(boardId);
   }
 
-  //TODO 댓글 삭제
+  /**
+   * 댓글 삭제!
+   * @param commentId
+   */
   @Transactional
   public void delete(Long commentId) {
     commentRepository.delete(commentId);
