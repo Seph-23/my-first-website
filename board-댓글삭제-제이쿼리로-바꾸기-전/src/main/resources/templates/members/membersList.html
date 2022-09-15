@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type>" content="text/html; charset=UTF-8"/>
+  <link th:href="@{/css/bootstrap.min.css}"
+        href="../css/bootstrap.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="#">
+  <style>
+    .container {
+      max-width: 560px;
+    }
+  </style>
+
+  <title>MembersList</title>
+</head>
+<body>
+<div class="container">
+  <h1>회원 목록</h1>
+  <div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>아이디</th>
+        <th>닉네임</th>
+        <th>권한</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="member : ${members}">
+        <td th:text="${member.userId}"></td>
+        <td th:text="${member.userName}"></td>
+        <td th:text="${member.role}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary" type="button"
+              onclick="location.href='home.html'"
+              th:onclick="|location.href='@{/home}'|"
+              th:text="뒤로가기">뒤로가기</button>
+    </div>
+  </div>
+
+</div> <!-- container -->
+
+</body>
+</html>

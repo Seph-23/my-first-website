@@ -58,7 +58,6 @@ public class Board implements Serializable {
   public void updateBoard(Board board, BoardForm boardForm) {
     board.setTitle(boardForm.getTitle());
     board.setContent(boardForm.getContent());
-    board.setModifiedDate(LocalDateTime.now());
   }
 
   //조회수 증가

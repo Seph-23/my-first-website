@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type>" content="text/html; charset=UTF-8"/>
+  <link th:href="@{/css/bootstrap.min.css}"
+        href="../css/bootstrap.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="#">
+  <style>
+    .container {
+      max-width: 560px;
+    }
+  </style>
+  <title>게시글 목록</title>
+</head>
+<body>
+<div class="container">
+  <h1>게시글 목록</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Created Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="board : ${boards}">
+      <td><a href="#" th:href="@{/boards/{id} (id=${board.id})}" th:text="${board.title}"></a></td>
+      <td th:text="${board.author}"></td>
+      <td th:text="${board.createdDate}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary" type="button"
+              onclick="location.href='home.html'"
+              th:onclick="|location.href='@{/home}'|"
+              th:text="뒤로가기">뒤로가기</button>
+    </div>
+  </div>
+  </form>
+</div>    <!-- container -->
+</body>
+</html>
