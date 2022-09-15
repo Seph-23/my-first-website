@@ -3,6 +3,7 @@ package myfirstwebsite.board.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -78,12 +79,22 @@ public class MemberController {
   //TODO
   @ResponseBody
   @PostMapping(value = {"/checkDup"})
-  public Map<String, Object> checkDup(@RequestParam Map<String, Object> params,
-    HttpServletRequest request, HttpServletResponse response){
+  public Map<String, Object> checkDup(@RequestParam Map<String, Object> params){
+    MemberForm memberForm = new MemberForm();
+    memberForm.setUserId(params.get("userId").toString());
+
+    Optional<Member> memberDb = memberService.findByLoginId(memberForm.getUserId());
+
     Map<String, Object> result = new HashMap<String, Object>();
-    result.put("resultCd", "200");
-    result.put("resultMsg", "post 통신이 성공하였습니다.");
-    System.out.println(params);
+
+    if (memberDb.isEmpty()) {
+      result.put("result", "ok");
+    } else {
+      result.put("result", "no");
+    }
+
+    result.put("redirect", "/members/new");
+
     return result;
   }
 }

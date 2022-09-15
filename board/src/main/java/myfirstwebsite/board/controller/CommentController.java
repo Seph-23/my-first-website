@@ -55,7 +55,7 @@ public class CommentController {
 
   //TODO 댓글 삭제
   @PostMapping("/comments/{id}/delete")
-  public String commentDelete (@PathVariable("id") Long commentId, Model model,
+  public String deleteComment(@PathVariable("id") Long commentId, Model model,
     HttpServletRequest request) {
 
     HttpSession session = request.getSession(false);

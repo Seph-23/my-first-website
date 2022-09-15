@@ -1,6 +1,7 @@
 package myfirstwebsite.board.service;
 
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import myfirstwebsite.board.controller.MemberForm;
 import myfirstwebsite.board.domain.Member;
@@ -38,4 +39,7 @@ public class MemberService {
     return memberRepository.checkIfUserIdExist(userId);
   }
 
+  public Optional<Member> findByLoginId(String userId) {
+    return memberRepository.findByLoginId(userId);
+  }
 }

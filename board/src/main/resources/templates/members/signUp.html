@@ -31,9 +31,9 @@
              class="form-control" placeholder="아이디를 입력하세요">
 
       <!-- TODO -->
-<!--      <button id="btnDup" onclick="checkDup()" class="btn btn-secondary">-->
-<!--        중복확인-->
-<!--      </button>-->
+      <button id="btnDup" onclick="checkDup()" class="btn btn-secondary">
+        중복확인
+      </button>
 
       <div class="field-error" th:errors="*{userId}">
         아이디 오류
@@ -74,24 +74,29 @@
 </div>    <!-- container -->
 
 <!-- JQuery, AJAX -->
-<!--<script type="text/javascript">-->
-<!--  function checkDup(){-->
-<!--    var params = {-->
-<!--      id : $('userId').val()-->
-<!--    }-->
+<script type="text/javascript">
+  function checkDup(){
+    var params = {
+      userId : $('#userId').val()
+    }
 
-<!--    $.ajax({-->
-<!--      url: "/checkDup",-->
-<!--      type: "POST",-->
-<!--      data: params,-->
-<!--      success: function(data){-->
-<!--        alert("회원 중복");-->
-<!--      },-->
-<!--      error: function(){-->
-<!--        alert("데이터 통신중 에러발생");-->
-<!--      }-->
-<!--    });-->
-<!--  }-->
-<!--</script>-->
+    $.ajax({
+      url: "/checkDup",
+      type: "POST",
+      data: params,
+      success: function(data){
+        if (data.result.toString() == 'ok') {
+          alert('가입 가능한 아이디 입니다.');
+        } else {
+          alert('중복된 아이디 입니다.')
+        }
+        window.location.href = data.redirect;
+      },
+      error: function(){
+        alert("서버 에러!")
+      }
+    });
+  }
+</script>
 </body>
 </html>

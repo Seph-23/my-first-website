@@ -6,6 +6,10 @@
         href="../css/bootstrap.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="#">
 
+  <!-- jQuery -->
+  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
   <style>
     .container {
       max-width: 560px;
@@ -29,7 +33,7 @@
     </div>
     <div class="col">
       <form role="form" th:action="@{/boards/{id}/update (id=${board.id})}">
-        <button type="submit" class="btn btn-danger">
+        <button type="submit" class="btn btn-secondary">
           수정
         </button>
       </form>
@@ -94,11 +98,8 @@
 </div>
 </body>
 
-<!-- TODO -->
 <script type="text/javascript">
-  function commentError() {
-    alert("삭제할 수 없는 댓글입니다.");
-  }
+
 </script>
 
 </html>
