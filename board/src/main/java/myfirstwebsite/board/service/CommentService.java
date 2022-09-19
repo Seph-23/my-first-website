@@ -19,10 +19,6 @@ public class CommentService {
 
   /**
    * 댓글 등록!
-   * @param member
-   * @param board
-   * @param commentForm
-   * @return
    */
   @Transactional
   public Long postComment(Member member, Board board, CommentForm commentForm) {
@@ -41,7 +37,6 @@ public class CommentService {
 
   /**
    * 게시글 삭제할때 해당 게시글에 있는 댓글 삭제!
-   * @param boardId
    */
   @Transactional
   public void deleteWithBoard(Long boardId) {
@@ -50,10 +45,17 @@ public class CommentService {
 
   /**
    * 댓글 삭제!
-   * @param commentId
    */
   @Transactional
   public void delete(Long commentId) {
     commentRepository.delete(commentId);
+  }
+
+  /**
+   * 댓글 수정!
+   */
+  @Transactional
+  public void update(Long commentId, CommentForm commentForm) {
+    commentRepository.update(commentId, commentForm);
   }
 }

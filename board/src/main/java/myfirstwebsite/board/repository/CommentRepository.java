@@ -3,6 +3,7 @@ package myfirstwebsite.board.repository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import myfirstwebsite.board.controller.CommentForm;
 import myfirstwebsite.board.domain.Comment;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -36,5 +37,11 @@ public class CommentRepository {
   //TODO 댓글 삭제
   public void delete(Long commentId) {
     em.remove(findOne(commentId));
+  }
+
+  public void update(Long commentId, CommentForm commentForm) {
+    Comment comment = findOne(commentId);
+    comment.setContent(commentForm.getContent());
+    save(comment);
   }
 }

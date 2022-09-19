@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type>" content="text/html; charset=UTF-8"/>
+  <link th:href="@{/css/bootstrap.min.css}"
+        href="../css/bootstrap.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="#">
+
+  <!-- jQuery -->
+  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+  <style>
+    .container {
+      max-width: 560px;
+    }
+    .field-error {
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+  </style>
+  <title>댓글 수정</title>
+</head>
+<body>
+<div class="container">
+  <h1>댓글 수정!</h1>
+  <label th:for="author" th:text="|저자: ${comment.getAuthor()}|">저자:</label>
+  <form role="form" th:action="@{/comments/{id}/update (id=${comment.id})}" method="post">
+    <label th:for="content">내용: </label>
+    <input type="text" id="content" th:field="${commentForm.content}"
+           class="form-control" th:placeholder="${comment.getContent()}">
+    <button type="submit" class="btn btn-secondary">수정</button>
+  </form>
+</div>
+</body>
+</html>

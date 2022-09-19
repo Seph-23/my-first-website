@@ -62,9 +62,15 @@
           <td th:text="${comment.author}"></td>
           <td th:text="${comment.content}"></td>
           <!-- TODO 댓글 삭제 -->
-          <td>
-            <form role="form" th:action="@{/comments/{id}/delete (id=${comment.id})}" method="post">
+          <td class="row">
+            <form class="col" role="form" th:action="@{/comments/{id}/delete (id=${comment.id})}"
+                  method="post">
               <button type="submit" class="btn btn-secondary">삭제</button>
+            </form>
+            <!-- TODO 댓글 수정 -->
+            <form class="col" role="form" th:action="@{/comments/{id}/update-form (id=${comment.id})}"
+                  method="post">
+              <button type="submit" class="btn btn-secondary">수정</button>
             </form>
           </td>
         </tr>
@@ -97,9 +103,5 @@
   </div>
 </div>
 </body>
-
-<script type="text/javascript">
-
-</script>
 
 </html>
