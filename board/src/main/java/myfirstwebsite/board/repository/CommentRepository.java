@@ -35,7 +35,6 @@ public class CommentRepository {
     }
   }
 
-  //TODO 댓글 삭제
   public void delete(Long commentId) {
     em.remove(findOne(commentId));
   }

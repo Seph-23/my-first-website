@@ -76,7 +76,6 @@ public class MemberController {
     return "members/membersList";
   }
 
-  //TODO 회원가입 중복확인
   @ResponseBody
   @PostMapping(value = {"/checkDup"})
   public Map<String, Object> checkDup(@RequestParam Map<String, Object> params){

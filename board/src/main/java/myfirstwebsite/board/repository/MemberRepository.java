@@ -29,7 +29,6 @@ public class MemberRepository {
     return findAll().stream().filter(m -> m.getUserId().equals(loginId)).findFirst();
   }
 
-  //TODO
   public boolean checkIfUserIdExist(String userId) {
     Optional<Member>  optional = findByLoginId(userId);
     if(optional.isEmpty()) {

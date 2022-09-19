@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Data;
-import myfirstwebsite.board.controller.BoardForm;
 import myfirstwebsite.board.controller.CommentForm;
 
 @Entity

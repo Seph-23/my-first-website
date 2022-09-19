@@ -53,7 +53,6 @@ public class CommentController {
     return "boards/boardDetail";
   }
 
-  //TODO 댓글 삭제
   @PostMapping("/comments/{id}/delete")
   public String deleteComment(@PathVariable("id") Long commentId, Model model,
     HttpServletRequest request) {
@@ -91,7 +90,6 @@ public class CommentController {
     return "boards/boardDetail";
   }
 
-  //TODO 댓글 수정
   @PostMapping("/comments/{id}/update-form")
   public String updateCommentForm(@PathVariable("id") Long commentId, Model model,
     HttpServletRequest request) {
@@ -127,7 +125,6 @@ public class CommentController {
     return "boards/boardDetail";
   }
 
-  //TODO 댓글 수정
   @PostMapping("/comments/{id}/update")
   public String updateComment(@ModelAttribute CommentForm commentForm,
     @PathVariable("id") Long commentId, Model model,
