@@ -149,7 +149,9 @@ public class CommentController {
       model.addAttribute("member", "none");
     }
 
+    //댓글 수정
     commentService.update(commentId, commentForm);
+
     List<Comment> comments = commentService.findComments(board.getId());
     if (comments != null && !comments.isEmpty()) {
       model.addAttribute("comments", comments);

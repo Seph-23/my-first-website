@@ -1,5 +1,6 @@
 package myfirstwebsite.board.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,6 @@ public class CommentRepository {
 
   public void update(Long commentId, CommentForm commentForm) {
     Comment comment = findOne(commentId);
-    comment.setContent(commentForm.getContent());
-    save(comment);
+    comment.updateComment(comment, commentForm);
   }
 }

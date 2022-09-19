@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Data;
+import myfirstwebsite.board.controller.BoardForm;
 import myfirstwebsite.board.controller.CommentForm;
 
 @Entity
@@ -53,5 +54,11 @@ public class Comment {
     comment.setCreatedDate(LocalDateTime.now());
     comment.setModifiedDate(LocalDateTime.now());
     return comment;
+  }
+
+  //댓글 수정 메서드
+  public void updateComment(Comment comment, CommentForm commentForm) {
+    comment.setContent(commentForm.getContent());
+    comment.setModifiedDate(LocalDateTime.now());
   }
 }
